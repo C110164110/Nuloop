@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuloop 訂閱式購物</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Nuloop</div>
+      <ul class="menu">
+        <li><a href="#">首頁</a></li>
+        <li><a href="#">商品</a></li>
+        <li><a href="#">我的訂閱</a></li>
+        <li><a href="#" id="login-btn">登入</a></li>
+        <li><a href="#" id="logout-btn" style="display:none;">登出</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>訂閱新生活 · Nuloop</h1>
+    <div class="products">
+      <div class="card">
+        <h2>MacBook Pro</h2>
+        <p>每月 $2000</p>
+        <button onclick="subscribe('MacBook Pro',2000)">訂閱</button>
+      </div>
+      <div class="card">
+        <h2>iPhone 15</h2>
+        <p>每月 $1500</p>
+        <button onclick="subscribe('iPhone 15',1500)">訂閱</button>
+      </div>
+      <div class="card">
+        <h2>Switch OLED</h2>
+        <p>每月 $800</p>
+        <button onclick="subscribe('Switch OLED',800)">訂閱</button>
+      </div>
+    </div>
+
+    <section id="my-subscriptions" style="display:none;">
+      <h2>我的訂閱</h2>
+      <div id="subscriptions-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Nuloop. All rights reserved.</p>
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
