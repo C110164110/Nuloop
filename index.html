@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VendoShop｜自動販賣機風格購物網站</title>
+  <meta name="description" content="自動販賣機風格購物網站，前台商店與購物車。">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="firebase-init.js"></script>
+</head>
+<body>
+<header class="topbar" role="banner">
+  <div class="brand" aria-label="VendoShop">
+    <span class="dot" aria-hidden="true"></span>
+    <span>VendoShop</span>
+    <span class="chip" id="authChip">未登入</span>
+  </div>
+  <div class="search" role="search">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3" stroke="#8fb4ff" stroke-width="2" stroke-linecap="round"/><circle cx="10.5" cy="10.5" r="6.5" stroke="#8fb4ff" stroke-width="2"/></svg>
+    <input id="q" placeholder="搜尋商品、槽位（A1、B2）、關鍵字…" />
+  </div>
+  <div class="seg">
+    <a href="admin.html" class="btn-ghost" title="管理後台（需登入）">🧰 後台</a>
+    <button id="btnLogin" class="btn">登入 / 註冊</button>
+    <button id="btnLogout" class="btn-ghost" style="display:none">登出</button>
+  </div>
+</header>
+
+<main class="layout" role="main">
+  <aside class="side" aria-label="分類">
+    <h3>分類 / Categories</h3>
+    <div class="cats" id="catList"></div>
+  </aside>
+
+  <section id="shop" class="machine" aria-label="自動販賣機展示區">
+    <div class="machine-head">
+      <div class="tabs" id="tabs"></div>
+      <div class="hint">點擊槽位加入購物車。庫存歸零會顯示售罄。</div>
+    </div>
+    <div class="glass">
+      <div id="rack" class="rack" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+
+<aside class="cart" aria-label="購物車" id="cart">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:8px">
+    <h4>🛍 購物車</h4>
+    <div class="hint" id="cartCount">0 件</div>
+  </div>
+  <div class="citems" id="cartItems"></div>
+  <div class="foot">
+    <div>
+      <div class="hint">小計</div>
+      <div id="cartTotal" style="font-size:20px; font-weight:800">NT$ 0</div>
+    </div>
+    <div style="display:flex; gap:8px">
+      <button id="btnClearCart" class="btn-ghost">清空</button>
+      <button id="btnCheckout" class="btn">結帳</button>
+    </div>
+  </div>
+</aside>
+
+<footer class="footer">© <span id="year"></span> VendoShop — 自動販賣機風格 Demo（localStorage）。</footer>
+
+<!-- Auth Modal -->
+<div id="authModal" class="modal" aria-hidden="true">
+  <div class="box">
+    <h3>登入 / 註冊</h3>
+    <div>
+      <input id="email" class="input" placeholder="Email" type="email">
+      <input id="password" class="input" placeholder="密碼（至少 6 碼）" type="password">
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+        <button id="btnEmailSignUp" class="btn">Email 註冊</button>
+        <button id="btnEmailSignIn" class="btn-ghost">Email 登入</button>
+        <button id="btnGoogle" class="btn">使用 Google 登入</button>
+        <button id="btnCloseModal" class="btn-ghost" style="margin-left:auto">關閉</button>
+      </div>
+      <div class="hint" id="authMsg" style="margin-top:8px"></div>
+    </div>
+  </div>
+</div>
+
+<script src="shop.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

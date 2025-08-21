@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VendoShop 後台管理</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="firebase-init.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <span>VendoShop 管理</span>
+    <span class="chip" id="authChip">驗證中…</span>
+  </div>
+  <div class="seg">
+    <a class="btn-ghost" href="index.html">🏪 回前台</a>
+    <button id="btnLogout" class="btn-ghost">登出</button>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="side">
+    <h3>管理選單</h3>
+    <div class="cats">
+      <div class="chip">商品管理</div>
+      <div class="chip">訂單示範</div>
+    </div>
+  </aside>
+
+  <section class="machine">
+    <div class="machine-head">
+      <div class="tabs">
+        <div class="tab" data-active="true">📦 商品</div>
+      </div>
+      <div class="hint">只有在管理員允許清單中的帳號可進入。</div>
+    </div>
+    <div class="glass">
+      <div class="panel">
+        <div class="grid">
+          <div class="col-6">
+            <h3>➕ 新增 / 編輯商品</h3>
+            <div class="grid">
+              <div class="col-12"><label>商品 ID（留空為新增）</label><input id="f-id" class="input" placeholder="自動產生" /></div>
+              <div class="col-6"><label>名稱</label><input id="f-name" class="input" placeholder="例如：氣泡水" /></div>
+              <div class="col-3"><label>價格（NT$）</label><input id="f-price" class="input" type="number" placeholder="45" /></div>
+              <div class="col-3"><label>庫存</label><input id="f-stock" class="input" type="number" placeholder="10" /></div>
+              <div class="col-6"><label>分類</label><select id="f-cat" class="input"></select></div>
+              <div class="col-6"><label>槽位代碼（如 A1、B2）</label><input id="f-slot" class="input" placeholder="A1" /></div>
+              <div class="col-12"><label>圖片（留空使用內建 SVG）</label><input id="f-img" class="input" placeholder="https://... 或 data:image/svg+xml;base64,..." /></div>
+              <div class="col-12" style="display:flex; gap:8px; flex-wrap:wrap">
+                <button id="btnSave" class="btn ok">💾 儲存</button>
+                <button id="btnDelete" class="btn danger">🗑 刪除</button>
+                <button id="btnClear" class="btn-ghost">🧹 清空表單</button>
+                <button id="btnExport" class="btn-ghost">📦 匯出</button>
+                <label class="btn-ghost" style="position:relative;overflow:hidden">
+                  <input id="fileImport" type="file" accept="application/json" style="position:absolute;inset:0;opacity:0" />⬆️ 匯入
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h3>📦 商品列表</h3>
+            <div style="overflow:auto; max-height:420px; border:1px solid rgba(255,255,255,.08); border-radius:12px">
+              <table id="tblProducts" aria-label="商品列表">
+                <thead><tr><th>ID</th><th>名稱</th><th>分類</th><th>槽位</th><th>價格</th><th>庫存</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-12">
+            <h3>🧾 訂單（僅示範）</h3>
+            <div class="panel">
+              <table id="tblOrders">
+                <thead><tr><th>#</th><th>時間</th><th>項目</th><th>總額</th><th>付款方式</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">© <span id="year"></span> VendoShop Admin — 僅限管理員。</footer>
+
+<script src="shop.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
